@@ -52,4 +52,4 @@ Para levantar el proyecto con docker las variables que debes definir son:
 Se añadira lógica de:
   - Transferencias entre usuarios
   - Gestión de monedas y conversiones
-  - Más microservicios (notificaciones, estadísticas)
+  - Más microservicios (gateway, notificaciones, estadísticas)
