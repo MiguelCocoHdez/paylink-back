@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.6</version>
+    <relativePath/>
+    <!-- lookup parent from repository -->
+  </parent>
+  <groupId>com.paylink.app</groupId>
+  <artifactId>paylink</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>paylink</name>
+  <url>http://www.example.com</url>
+  <packaging>pom</packaging>
+  <modules>
+    <module>microservice-config-paylink</module>
+    <module>microservice-eureka-paylink</module>
+    <module>microservice-auth-paylink</module>
+    <module>microservice-user-paylink</module>
+    <module>paylink-kafka-events</module>
+  </modules>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>21</maven.compiler.release>
+  </properties>
+  <dependencies/>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>3.5.6</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

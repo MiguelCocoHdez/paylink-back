@@ -1,0 +1,12 @@
+# IDEs
+.vscode/
+.idea/
+
+# Maven
+target/
+
+# Archivos de configuración sensibles
+.env
+
+# Docker
+*.log

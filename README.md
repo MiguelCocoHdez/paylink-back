@@ -21,7 +21,7 @@ El proyecto tiene como objetivo **aprender y demostrar buenas prácticas de back
 ### Requisitos
 
 - Docker instalado
-- Java 21 y Maven instalados localmente si deseas recompilar (opcional, se incluyen los JARs ya compilados)
+- Java 21 y Maven instalados localmente
 
 ### Comandos
 
@@ -30,8 +30,13 @@ El proyecto tiene como objetivo **aprender y demostrar buenas prácticas de back
 ```bash
 git clone https://github.com/MiguelCocoHdez/paylink-back
 ```
+2. Compilar con maven
 
-2. Levantar todos los microservicios con Docker Compose:
+```bash
+mvn clean install -DskipTests
+```
+
+4. Levantar todos los microservicios con Docker Compose:
 
 ```bash
 docker compose up -d
