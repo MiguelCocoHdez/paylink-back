@@ -8,8 +8,8 @@ import com.paylink.auth.application.port.in.RegisterLocalUseCase;
 import com.paylink.auth.application.port.out.UserRegisteredPublisher;
 import com.paylink.auth.application.port.out.UserRepository;
 import com.paylink.auth.domain.model.User;
-import com.paylink.auth.infrastructure.security.JwtService;
 import com.paylink.kafka.events.UserRegisteredEvent;
+import com.paylink.security.jwt.JwtService;
 
 import lombok.RequiredArgsConstructor;
 

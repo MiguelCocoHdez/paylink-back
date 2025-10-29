@@ -1,4 +1,4 @@
-package com.paylink.auth.infrastructure.security;
+package com.paylink.security.jwt;
 
 import java.io.IOException;
 

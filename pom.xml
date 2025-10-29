@@ -19,6 +19,7 @@
     <module>microservice-auth-paylink</module>
     <module>microservice-user-paylink</module>
     <module>paylink-kafka-events</module>
+    <module>paylink-security</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

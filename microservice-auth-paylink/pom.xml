@@ -114,9 +114,15 @@
 		  <version>4.0.0</version>
 		</dependency>
 		
+		<!-- Dependencias modulos locales -->
 		<dependency>
 		    <groupId>com.paylink.kafka</groupId>
 		    <artifactId>paylink-kafka-events</artifactId>
+		    <version>1.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.paylink</groupId>
+		    <artifactId>microservice-security-paylink</artifactId>
 		    <version>1.0.0</version>
 		</dependency>
 

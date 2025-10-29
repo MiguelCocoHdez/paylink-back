@@ -7,7 +7,7 @@ import com.paylink.auth.application.dto.UserLoginLocalDTO;
 import com.paylink.auth.application.port.in.LoginLocalUseCase;
 import com.paylink.auth.application.port.out.UserRepository;
 import com.paylink.auth.domain.model.User;
-import com.paylink.auth.infrastructure.security.JwtService;
+import com.paylink.security.jwt.JwtService;
 
 import lombok.RequiredArgsConstructor;
 
