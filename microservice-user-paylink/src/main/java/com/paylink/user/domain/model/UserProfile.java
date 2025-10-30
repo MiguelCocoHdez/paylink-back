@@ -66,7 +66,7 @@ public class UserProfile {
 	}
 	
 	//Metodos
-	void completeProfile(String fullName, String currency) {
+	public void completeProfile(String fullName, String currency) {
 		this.fullName = fullName;
 		this.currency = currency;
 	}

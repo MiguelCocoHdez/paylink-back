@@ -20,4 +20,21 @@ public class JpaUserProfileRepository implements UserProfileRepository {
 		upr.save(mapper.toEntity(userProfile));
 	}
 
+	@Override
+	public UserProfile findById(Long id) {
+		UserProfileEntity user = upr.findUserById(id);
+		UserProfile userIncomplete = null;
+		
+		if(user != null) {
+			userIncomplete = mapper.toDomain(user);
+		}
+		
+		return userIncomplete;
+	}
+
+	@Override
+	public void completeUserProfile(UserProfile completedUser) {
+		upr.completeUserProfile(completedUser.getId(), completedUser.getFullName(), completedUser.getCurrency());
+	}
+
 }

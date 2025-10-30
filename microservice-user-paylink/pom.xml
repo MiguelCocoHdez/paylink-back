@@ -41,10 +41,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
@@ -85,10 +81,23 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		 <dependency>
+		  <groupId>me.paulschwarz</groupId>
+		  <artifactId>spring-dotenv</artifactId>
+		  <version>4.0.0</version>
+		</dependency>
+		
+		<!-- Dependencias locales -->
 		<dependency>
 			<groupId>com.paylink.kafka</groupId>
 			<artifactId>paylink-kafka-events</artifactId>
 			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.paylink</groupId>
+		    <artifactId>microservice-security-paylink</artifactId>
+		    <version>1.0.0</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
