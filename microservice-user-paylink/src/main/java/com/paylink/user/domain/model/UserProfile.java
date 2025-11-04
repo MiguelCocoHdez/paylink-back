@@ -70,5 +70,9 @@ public class UserProfile {
 		this.fullName = fullName;
 		this.currency = currency;
 	}
+	
+	public void addBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
 
 }

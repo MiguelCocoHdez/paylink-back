@@ -1,5 +1,7 @@
 package com.paylink.user.infrastructure.persistance;
 
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Repository;
 
 import com.paylink.user.application.port.out.UserProfileRepository;
@@ -35,6 +37,11 @@ public class JpaUserProfileRepository implements UserProfileRepository {
 	@Override
 	public void completeUserProfile(UserProfile completedUser) {
 		upr.completeUserProfile(completedUser.getId(), completedUser.getFullName(), completedUser.getCurrency());
+	}
+
+	@Override
+	public void addBalance(BigDecimal balance, Long id) {
+		upr.addBalance(balance, id);
 	}
 
 }

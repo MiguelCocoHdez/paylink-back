@@ -1,5 +1,7 @@
 package com.paylink.user.application.port.out;
 
+import java.math.BigDecimal;
+
 import com.paylink.user.domain.model.UserProfile;
 
 public interface UserProfileRepository {
@@ -9,4 +11,6 @@ public interface UserProfileRepository {
 	UserProfile findById(Long id);
 	
 	void completeUserProfile(UserProfile completedUser);
+	
+	void addBalance(BigDecimal balance, Long id);
 }
