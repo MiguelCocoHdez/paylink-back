@@ -72,6 +72,13 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Dependencias locales -->
+		<dependency>
+			<groupId>com.paylink.kafka</groupId>
+			<artifactId>paylink-kafka-events</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

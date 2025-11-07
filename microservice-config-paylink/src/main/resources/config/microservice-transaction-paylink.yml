@@ -1,11 +1,11 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
   application:
-    name: microservice-user-paylink
+    name: microservice-transaction-paylink
   datasource:
-    url: jdbc:postgresql://localhost:5432/paylink_user
+    url: jdbc:postgresql://localhost:5432/paylink_transaction
     username: postgres
     password: miguel1234
     driver-class-name: org.postgresql.Driver
@@ -23,19 +23,14 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
-      group-id: user-service-group
+      group-id: transaction-service-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
 
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-jwt:
-  secret: ${JWT_PASSWORD}
-  expiration: 86400000 # 1 día en ms

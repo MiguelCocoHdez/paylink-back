@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.paylink.user.application.dto.AddBalanceDTO;
 import com.paylink.user.application.dto.CompleteUserProfileDTO;
+import com.paylink.user.application.dto.CreateTransactionDTO;
 import com.paylink.user.application.port.in.AddBalanceUseCase;
 import com.paylink.user.application.port.in.CompleteUserProfileUseCase;
+import com.paylink.user.application.port.in.CreateTransactionUseCase;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +23,7 @@ public class UserController {
 
 	private final CompleteUserProfileUseCase completeUser;
 	private final AddBalanceUseCase addBalance;
+	private final CreateTransactionUseCase createTransaction;
 	
 	@PostMapping("completeUser/{id}")
 	ResponseEntity<String> completeUser(@PathVariable Long id, @RequestBody CompleteUserProfileDTO userComplete) {
@@ -34,5 +37,12 @@ public class UserController {
 		addBalance.addBalance(balance, id);
 		
 		return ResponseEntity.ok("Balance añadido correctamente");
+	}
+	
+	@PostMapping("createTransaction/{senderId}")
+	ResponseEntity<String> createTransaction(@PathVariable Long senderId, @RequestBody CreateTransactionDTO transactionData) {
+		createTransaction.createTransaction(senderId, transactionData);
+		
+		return ResponseEntity.ok("Transaccion realizada con éxito");
 	}
 }
