@@ -12,5 +12,5 @@ public interface UserProfileRepository {
 	
 	void completeUserProfile(UserProfile completedUser);
 	
-	void addBalance(BigDecimal balance, Long id);
+	void setBalance(BigDecimal balance, Long id);
 }

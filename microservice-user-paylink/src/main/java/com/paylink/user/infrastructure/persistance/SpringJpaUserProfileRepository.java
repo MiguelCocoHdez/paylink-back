@@ -21,5 +21,5 @@ public interface SpringJpaUserProfileRepository extends JpaRepository<UserProfil
 	@Modifying
 	@Transactional
 	@Query(value = "UPDATE user_profiles SET balance = :balance WHERE id = :id", nativeQuery = true)
-	void addBalance(@Param("balance") BigDecimal balance, @Param("id") Long id);
+	void setBalance(@Param("balance") BigDecimal balance, @Param("id") Long id);
 }

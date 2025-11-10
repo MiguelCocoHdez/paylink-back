@@ -40,8 +40,8 @@ public class JpaUserProfileRepository implements UserProfileRepository {
 	}
 
 	@Override
-	public void addBalance(BigDecimal balance, Long id) {
-		upr.addBalance(balance, id);
+	public void setBalance(BigDecimal balance, Long id) {
+		upr.setBalance(balance, id);
 	}
 
 }

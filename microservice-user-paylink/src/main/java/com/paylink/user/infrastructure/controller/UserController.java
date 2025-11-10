@@ -43,6 +43,6 @@ public class UserController {
 	ResponseEntity<String> createTransaction(@PathVariable Long senderId, @RequestBody CreateTransactionDTO transactionData) {
 		createTransaction.createTransaction(senderId, transactionData);
 		
-		return ResponseEntity.ok("Transaccion realizada con éxito");
+		return ResponseEntity.ok("Realizando transaccion...");
 	}
 }

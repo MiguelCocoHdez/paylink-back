@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.paylink.user.application.dto.AddBalanceDTO;
 import com.paylink.user.application.port.in.AddBalanceUseCase;
 import com.paylink.user.application.port.out.UserProfileRepository;
+import com.paylink.user.domain.model.UserProfile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +17,11 @@ public class AddBalanceService implements AddBalanceUseCase {
 	
 	@Override
 	public void addBalance(AddBalanceDTO balance, Long id) {
-		upr.addBalance(balance.getBalance(), id);
+		UserProfile user = upr.findById(id);
+		
+		user.addBalance(balance.getBalance());
+		
+		upr.setBalance(user.getBalance(), id); //Actualiza en bdd el usuario con el nuevo balance
 	}
 
 }

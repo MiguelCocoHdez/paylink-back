@@ -1,6 +1,7 @@
 package com.paylink.user.domain.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import lombok.Getter;
 
@@ -72,7 +73,7 @@ public class UserProfile {
 	}
 	
 	public void addBalance(BigDecimal balance) {
-		this.balance = balance;
+		this.balance = this.balance.add(balance).setScale(2, RoundingMode.HALF_UP); //Evita que el balance tenga mas de dos decimales
 	}
 
 }
