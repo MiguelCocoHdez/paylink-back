@@ -1,4 +1,4 @@
-package com.paylink.auth.infrastructure.security;
+package com.paylink.security.jwt;
 
 import java.util.Base64;
 import java.util.Date;
@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +17,12 @@ import io.jsonwebtoken.Jwts;
 @Service
 public class JwtService {
 	
-	@Value("${jwt.secret}")
-	private String SECRET_KEY;
+	private final SecretKey secretKey;
+	
+	public JwtService(String secret) { //La secret key se hace desde el constructor para que cada micro tenga la suya
+        byte[] bytes = Base64.getDecoder().decode(secret);
+        this.secretKey = new SecretKeySpec(bytes, "HmacSHA256");
+    }
 	
 	public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
 		return Jwts.builder()
@@ -27,7 +30,7 @@ public class JwtService {
 				.subject(userDetails.getUsername())
 				.issuedAt(new Date(System.currentTimeMillis()))
 				.expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
-				.signWith(getSignInKey())
+				.signWith(secretKey)
 				.compact();			
 	}
 	
@@ -51,15 +54,9 @@ public class JwtService {
 	
 	private Claims extractAllClaims(String token) {
 		return Jwts.parser()
-				.verifyWith(getSignInKey())
+				.verifyWith(secretKey)
 				.build()
 				.parseSignedClaims(token)
 				.getPayload();
-	}
-	
-	private SecretKey getSignInKey() {
-		byte[] bytes = Base64.getDecoder().decode(SECRET_KEY);
-		
-		return new SecretKeySpec(bytes, "HmacSHA256"); 
 	}
 }

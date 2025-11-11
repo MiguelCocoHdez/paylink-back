@@ -14,7 +14,6 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
-import com.paylink.kafka.events.UserRegisteredEvent;
 
 
 @Configuration
@@ -38,17 +37,17 @@ public class KafkaConsumerConfig {
     }
 	
 	@Bean
-    ConsumerFactory<String, UserRegisteredEvent> consumerFactory() {
+    ConsumerFactory<String, Object> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(
                 consumerConfig(),
                 new StringDeserializer(),
-                new JsonDeserializer<>(UserRegisteredEvent.class)
+                new JsonDeserializer<>(Object.class)
         );
     }
 	
 	@Bean
-    ConcurrentKafkaListenerContainerFactory<String, UserRegisteredEvent> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, UserRegisteredEvent> factory =
+    ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
