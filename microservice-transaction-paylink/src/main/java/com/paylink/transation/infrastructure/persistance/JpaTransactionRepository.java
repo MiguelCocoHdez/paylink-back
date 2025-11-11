@@ -25,11 +25,11 @@ public class JpaTransactionRepository implements TransactionRepository {
 
 	@Override
 	public void markAsFailed(Long id) {
-		tr.changeStatus(id, TransactionStatus.FAILED);
+		tr.changeStatus(id, TransactionStatus.FAILED.name());
 	}
 
 	@Override
 	public void markAsAccepted(Long id) {
-		tr.changeStatus(id, TransactionStatus.ACCEPTED);
+		tr.changeStatus(id, TransactionStatus.SUCCESS.name()); 
 	}
 }

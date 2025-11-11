@@ -21,7 +21,10 @@ public class ProccessDirectTransactionService implements ProccessDirectTransacti
 	
 	@Override
 	public void validateTransaction(Transaction transaction) {
-		validator.validate(transaction);
+		if(!validator.validate(transaction)) {
+			return;
+		}
+		
 		
 		tr.markAsAccepted(transaction.getId());
 		

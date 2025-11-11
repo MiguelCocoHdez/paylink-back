@@ -28,7 +28,7 @@ public class CreateTransactionListenerImpl implements CreateTransactionListener 
 			containerFactory = "kafkaListenerContainerFactory"
 			)
 	public void listenCreateTransaction(TransactionCreatedEvent transaction) {
-		Transaction completeTransaction = Transaction.createTransaction(transaction.senderId(), 
+		Transaction incompleteTransaction = Transaction.createTransaction(transaction.senderId(), 
 				transaction.receiverId(), 
 				transaction.amount(), 
 				transaction.currency(), 
@@ -36,10 +36,10 @@ public class CreateTransactionListenerImpl implements CreateTransactionListener 
 				TransactionStatus.PENDING, 
 				LocalDateTime.now());
 		
-		saveTransaction.saveTransaction(completeTransaction);
+		Transaction transactionWithId = saveTransaction.saveTransaction(incompleteTransaction);
 		
-		if(completeTransaction.getCurrency().equals(completeTransaction.getTargetCurrency())) {
-			directTransaction.validateTransaction(completeTransaction);
+		if(transactionWithId.getCurrency().equals(transactionWithId.getTargetCurrency())) {
+			directTransaction.validateTransaction(transactionWithId);
 		}
 	}
 

@@ -4,5 +4,5 @@ import com.paylink.transation.domain.model.Transaction;
 
 public interface TransactionValidator {
 
-	void validate(Transaction transaction);
+	boolean validate(Transaction transaction);
 }
