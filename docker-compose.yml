@@ -31,6 +31,21 @@ services:
     volumes:
       - user_data:/var/lib/postgresql/data
 
+  transaction-db:
+    image: postgres:17
+    container_name: transaction-db
+    environment:
+      POSTGRES_DB: paylink_transaction
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5435:5432"
+    networks:
+      - paylink-net
+    volumes:
+      - transaction_data:/var/lib/postgresql/data
+
+  #SERVICIOS:
   kafka:
     image: confluentinc/cp-kafka:7.8.3
     container_name: kafka
@@ -45,7 +60,7 @@ services:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker, controller
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092 # Cambiar a localhost para probar microservicios localmente // a kafka para probarlo en docker compose
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092 # Cambiar a localhost para probar microservicios localmente // a kafka para probarlo en docker compose
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
@@ -129,11 +144,33 @@ services:
       - SPRING_CONFIG_IMPORT=optional:configserver:http://config-service:8888
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-service:8761/eureka/
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - JWT_PASSWORD=${JWT_PASSWORD}
+  
+  transaction-service:
+    build: ./microservice-transaction-paylink
+    container_name: transaction-service
+    networks:
+      - paylink-net
+    depends_on:
+      eureka-service:
+        condition: service_healthy
+      config-service:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://transaction-db:5432/paylink_transaction
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-service:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-service:8761/eureka/
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - JWT_PASSWORD=${JWT_PASSWORD}
 
 volumes:
   kafka_kraft:
   auth_data:
   user_data:
+  transaction_data:
 
 networks:
   paylink-net:
