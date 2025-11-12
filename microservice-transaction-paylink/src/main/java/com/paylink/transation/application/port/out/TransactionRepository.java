@@ -9,4 +9,6 @@ public interface TransactionRepository {
 	void markAsFailed(Long id);
 	
 	void markAsAccepted(Long id);
+	
+	void markAsProcessing(Long id);
 }

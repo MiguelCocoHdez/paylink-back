@@ -23,4 +23,12 @@ public class KafkaTopicConfig {
 				.replicas(1)
 				.build();
 	}
+	
+	@Bean
+	NewTopic differentExchangeTransactionTopic() {
+		return TopicBuilder.name("different-exchange-transaction")
+				.partitions(1)
+				.replicas(1)
+				.build();
+	}
 }

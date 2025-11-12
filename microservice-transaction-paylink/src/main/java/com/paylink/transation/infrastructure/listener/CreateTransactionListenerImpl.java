@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.paylink.kafka.events.TransactionCreatedEvent;
 import com.paylink.transation.application.port.in.ProccessDirectTransactionUseCase;
+import com.paylink.transation.application.port.in.ProcessCurrencyExchangeTransactionUseCase;
 import com.paylink.transation.application.port.in.SaveTransactionUseCase;
 import com.paylink.transation.application.port.out.CreateTransactionListener;
 import com.paylink.transation.domain.model.Transaction;
@@ -20,6 +21,7 @@ public class CreateTransactionListenerImpl implements CreateTransactionListener 
 
 	private final SaveTransactionUseCase saveTransaction;
 	private final ProccessDirectTransactionUseCase directTransaction;
+	private final ProcessCurrencyExchangeTransactionUseCase exchangeTransaction;
 	
 	@Override
 	@KafkaListener(
@@ -40,6 +42,10 @@ public class CreateTransactionListenerImpl implements CreateTransactionListener 
 		
 		if(transactionWithId.getCurrency().equals(transactionWithId.getTargetCurrency())) {
 			directTransaction.validateTransaction(transactionWithId);
+		}
+		
+		if(!transactionWithId.getCurrency().equals(transactionWithId.getTargetCurrency())) {
+			exchangeTransaction.validateAndSendToExchange(transactionWithId);
 		}
 	}
 

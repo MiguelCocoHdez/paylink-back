@@ -32,4 +32,9 @@ public class JpaTransactionRepository implements TransactionRepository {
 	public void markAsAccepted(Long id) {
 		tr.changeStatus(id, TransactionStatus.SUCCESS.name()); 
 	}
+
+	@Override
+	public void markAsProcessing(Long id) {
+		tr.changeStatus(id, TransactionStatus.PROCESSING.name());
+	}
 }
