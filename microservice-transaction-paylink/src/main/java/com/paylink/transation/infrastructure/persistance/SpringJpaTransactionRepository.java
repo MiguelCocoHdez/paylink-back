@@ -15,4 +15,7 @@ public interface SpringJpaTransactionRepository extends JpaRepository<Transactio
 	@Query(value = "UPDATE transactions SET status = :status WHERE id = :id", nativeQuery = true)
 	void changeStatus(@Param("id") Long id, @Param("status") String status);
 	
+	@Query(value = "SELECT * FROM transactions WHERE id = :id", nativeQuery = true)
+	TransactionEntity findUserById(@Param("id") Long id);
+	
 }

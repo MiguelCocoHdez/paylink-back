@@ -28,9 +28,12 @@ public class ProccessDirectTransactionService implements ProccessDirectTransacti
 		
 		tr.markAsAccepted(transaction.getId());
 		
-		transactionSuccess.publishTransactionSuccess(new TransactionSuccessEvent(transaction.getId(),
+		transactionSuccess.publishTransactionSuccess(new TransactionSuccessEvent(
+				transaction.getId(),
 				transaction.getSenderId(),
 				transaction.getReceiverId(),
+				transaction.getCurrency(),
+				transaction.getTargetCurrency(),
 				transaction.getAmount(),
 				null,
 				transaction.getCreatedAt(),

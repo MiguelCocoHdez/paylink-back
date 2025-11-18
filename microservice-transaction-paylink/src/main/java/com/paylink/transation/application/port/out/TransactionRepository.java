@@ -11,4 +11,6 @@ public interface TransactionRepository {
 	void markAsAccepted(Long id);
 	
 	void markAsProcessing(Long id);
+	
+	Transaction findById(Long id);
 }

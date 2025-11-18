@@ -39,7 +39,7 @@ public class CreateTransactionListenerImpl implements CreateTransactionListener 
 				LocalDateTime.now());
 		
 		Transaction transactionWithId = saveTransaction.saveTransaction(incompleteTransaction);
-		
+
 		if(transactionWithId.getCurrency().equals(transactionWithId.getTargetCurrency())) {
 			directTransaction.validateTransaction(transactionWithId);
 		}

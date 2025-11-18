@@ -29,6 +29,8 @@ public class ProcessCurrencyExchangeTransactionService implements ProcessCurrenc
 		
 		transactionExchangePublisher.transactionExchange(new TransactionExchangeEvent(
 				transaction.getId(),
+				transaction.getSenderId(),
+				transaction.getReceiverId(),
 				transaction.getAmount(),
 				transaction.getCurrency(),
 				transaction.getTargetCurrency()

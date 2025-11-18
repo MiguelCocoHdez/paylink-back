@@ -37,4 +37,9 @@ public class JpaTransactionRepository implements TransactionRepository {
 	public void markAsProcessing(Long id) {
 		tr.changeStatus(id, TransactionStatus.PROCESSING.name());
 	}
+
+	@Override
+	public Transaction findById(Long id) {
+		return mapper.toDomain(tr.findUserById(id));
+	}
 }

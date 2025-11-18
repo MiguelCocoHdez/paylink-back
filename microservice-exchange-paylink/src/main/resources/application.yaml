@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: microservice-exchange-paylink
+  config:
+    import: optional:configserver:http://localhost:8888

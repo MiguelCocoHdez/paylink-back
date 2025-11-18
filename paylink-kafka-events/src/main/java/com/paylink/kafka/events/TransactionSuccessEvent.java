@@ -7,6 +7,8 @@ public record TransactionSuccessEvent(
 		Long transactionId,
 		Long senderId,
 		Long receiverId,
+		String currency,
+		String targetCurrency,
 		BigDecimal amount,
 		BigDecimal exchangedAmount,
 		LocalDateTime timestamp,

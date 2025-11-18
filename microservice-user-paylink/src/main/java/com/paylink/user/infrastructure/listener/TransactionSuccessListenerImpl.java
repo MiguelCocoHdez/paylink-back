@@ -28,8 +28,13 @@ public class TransactionSuccessListenerImpl implements TransactionSuccessListene
 		UserProfile sender = upr.findById(event.senderId());
 		UserProfile receiver = upr.findById(event.receiverId());
 		
-		upr.setBalance(sender.getBalance().subtract(event.amount()), sender.getId()); //restas el balance al que lo envia
-		upr.setBalance(receiver.getBalance().add(event.amount()), receiver.getId()); //Sumas el balance al que recibe
+		if(event.exchangedAmount() == null) {
+			upr.setBalance(sender.getBalance().subtract(event.amount()), sender.getId()); //restas el balance al que lo envia
+			upr.setBalance(receiver.getBalance().add(event.amount()), receiver.getId()); //Sumas el balance al que recibe
+		} else {
+			upr.setBalance(sender.getBalance().subtract(event.amount()), sender.getId()); //restas el balance normal enviadi al que lo envia
+			upr.setBalance(receiver.getBalance().add(event.exchangedAmount()), receiver.getId()); //Sumas el balance del exchangedAmount al que recibe
+		}
 		
 		webSocket.convertAndSend(
 				"/topic/transactions",

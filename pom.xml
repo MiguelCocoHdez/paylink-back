@@ -19,6 +19,7 @@
     <module>microservice-auth-paylink</module>
     <module>microservice-user-paylink</module>
     <module>microservice-transaction-paylink</module>
+    <module>microservice-exchange-paylink</module>
     <module>paylink-kafka-events</module>
     <module>paylink-security</module>
   </modules>
