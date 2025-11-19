@@ -67,6 +67,13 @@ services:
 
     volumes:
       - kafka_kraft:/var/lib/kafka/data
+  
+  redis:
+    image: redis:7.2
+    container_name: redis
+    ports:
+      - 6379:6379
+    command: ["redis-server", "--appendonly", "yes"]
 
   config-service:
     build: ./microservice-config-paylink
