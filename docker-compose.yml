@@ -60,7 +60,7 @@ services:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker, controller
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092 # Cambiar a localhost para probar microservicios localmente // a kafka para probarlo en docker compose
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092 # Cambiar a localhost para probar microservicios localmente // a kafka para probarlo en docker compose
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
@@ -73,6 +73,8 @@ services:
     container_name: redis
     ports:
       - 6379:6379
+    networks:
+      - paylink-net
     command: ["redis-server", "--appendonly", "yes"]
 
   config-service:
@@ -172,6 +174,24 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-service:8761/eureka/
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - JWT_PASSWORD=${JWT_PASSWORD}
+  
+  exchange-service:
+    build: ./microservice-exchange-paylink
+    container_name: exchange-service
+    networks:
+      - paylink-net
+    depends_on:
+      eureka-service:
+        condition: service_healthy
+      config-service:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-service:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-service:8761/eureka/
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - EXCHANGERATE_API_KEY=${EXCHANGERATE_KEY}
+      - SPRING_DATA_REDIS_HOST=redis
 
 volumes:
   kafka_kraft:
