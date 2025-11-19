@@ -47,6 +47,7 @@ docker compose up -d
 Para levantar el proyecto con docker las variables que debes definir son:
 
   - JWT_SECRET=tu_variable
+  - EXCHANGERATE_KEY=tu API key de https://www.exchangerate-api.com
 
 > ⚠️ Debes crear un archivo .env en la raíz del proyecto con estas variables.
 
@@ -55,6 +56,4 @@ Para levantar el proyecto con docker las variables que debes definir son:
 ### Desarrollo fututo
 
 Se añadira lógica de:
-  - Transferencias entre usuarios
-  - Gestión de monedas y conversiones
   - Más microservicios (gateway, notificaciones, estadísticas)
