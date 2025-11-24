@@ -16,6 +16,7 @@
   <modules>
     <module>microservice-config-paylink</module>
     <module>microservice-eureka-paylink</module>
+    <module>microservice-gateway-paylink</module>
     <module>microservice-auth-paylink</module>
     <module>microservice-user-paylink</module>
     <module>microservice-transaction-paylink</module>

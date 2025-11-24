@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: TRACE
+    org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: DEBUG
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: microservice-gateway-paylink
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      globalcors:
+        cors-configurations: 
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:4200"
+            allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS","PATCH"]
+            allowedHeaders: ["*"]
+
+      routes:
+        - id: MICROSERVICE-AUTH-PAYLINK
+          uri: lb://MICROSERVICE-AUTH-PAYLINK
+          predicates:
+            - Path=/paylink/auth/**
+
+        - id: MICROSERVICE-USER-PAYLINK
+          uri: lb://MICROSERVICE-USER-PAYLINK
+          predicates:
+            - Path=/paylink/user/**
