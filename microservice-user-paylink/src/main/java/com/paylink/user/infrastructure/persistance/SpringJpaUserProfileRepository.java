@@ -22,4 +22,6 @@ public interface SpringJpaUserProfileRepository extends JpaRepository<UserProfil
 	@Transactional
 	@Query(value = "UPDATE user_profiles SET balance = :balance WHERE id = :id", nativeQuery = true)
 	void setBalance(@Param("balance") BigDecimal balance, @Param("id") Long id);
+	
+	UserProfileEntity findByEmail(String email);
 }

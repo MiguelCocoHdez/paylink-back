@@ -44,4 +44,16 @@ public class JpaUserProfileRepository implements UserProfileRepository {
 		upr.setBalance(balance, id);
 	}
 
+	@Override
+	public UserProfile findByEmail(String email) {
+		UserProfileEntity user = upr.findByEmail(email);
+		UserProfile userIncomplete = null;
+		
+		if(user != null) {
+			userIncomplete = mapper.toDomain(user);
+		}
+		
+		return userIncomplete;
+	}
+
 }

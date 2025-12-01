@@ -13,4 +13,6 @@ public interface UserProfileRepository {
 	void completeUserProfile(UserProfile completedUser);
 	
 	void setBalance(BigDecimal balance, Long id);
+	
+	UserProfile findByEmail(String email);
 }
