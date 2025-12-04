@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.paylink.auth.application.dto.UserLoginLocalDTO;
 import com.paylink.auth.application.port.in.LoginLocalUseCase;
 import com.paylink.auth.application.port.out.UserRepository;
+import com.paylink.auth.domain.exception.InvalidCredentialsException;
 import com.paylink.auth.domain.model.User;
 import com.paylink.security.jwt.JwtService;
 
@@ -29,12 +30,8 @@ public class LoginLocalService implements LoginLocalUseCase {
 			user = ur.findByUsername(login.getEmailOrUsername());
 		}
 		
-		if(user == null) {
-			throw new IllegalArgumentException("Usuario no registrado");
-		}
-		
-		if(!pe.matches(login.getPassword(), user.getPassword())) {
-			throw new IllegalArgumentException("Contraseña incorrecta");
+		if(user == null || !pe.matches(login.getPassword(), user.getPassword())) {
+		    throw new InvalidCredentialsException("Usuario o contraseña incorrectos");
 		}
 		
 		return js.generateToken(

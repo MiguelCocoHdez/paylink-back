@@ -37,9 +37,10 @@ public class UserController {
 		return ResponseEntity.ok("Usuario completado correctamente");
 	}
 	
-	@PostMapping("addBalance/{id}")
-	ResponseEntity<String> addBalance(@PathVariable Long id, @RequestBody AddBalanceDTO balance) {
-		addBalance.addBalance(balance, id);
+	@PostMapping("/addBalance")
+	ResponseEntity<String> addBalance(Authentication auth, @RequestBody AddBalanceDTO balance) {
+		String email = (String) auth.getPrincipal();
+		addBalance.addBalance(balance, email);
 		
 		return ResponseEntity.ok("Balance añadido correctamente");
 	}

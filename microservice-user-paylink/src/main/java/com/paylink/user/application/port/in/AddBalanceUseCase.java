@@ -4,5 +4,5 @@ import com.paylink.user.application.dto.AddBalanceDTO;
 
 public interface AddBalanceUseCase {
 
-	void addBalance(AddBalanceDTO balance, Long id);
+	void addBalance(AddBalanceDTO balance, String email);
 }
