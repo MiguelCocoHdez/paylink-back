@@ -23,7 +23,7 @@ public class SecurityConfig {
 		http
 			.csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests(auth -> auth
-			.requestMatchers("/ws/**").permitAll()
+			.requestMatchers("/ws/**", "/paylink/contact/searchContacts").permitAll()
 			.anyRequest().authenticated())
 			.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 		

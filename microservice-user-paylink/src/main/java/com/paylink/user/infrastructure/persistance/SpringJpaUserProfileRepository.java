@@ -1,6 +1,7 @@
 package com.paylink.user.infrastructure.persistance;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,4 +25,13 @@ public interface SpringJpaUserProfileRepository extends JpaRepository<UserProfil
 	void setBalance(@Param("balance") BigDecimal balance, @Param("id") Long id);
 	
 	UserProfileEntity findByEmail(String email);
+	
+	@Query(value = """
+		    SELECT * FROM user_profiles
+		    WHERE LOWER(username) LIKE LOWER(CONCAT('%', :contactInfo, '%'))
+		       OR LOWER(email) LIKE LOWER(CONCAT('%', :contactInfo, '%'))
+		       OR LOWER(full_name) LIKE LOWER(CONCAT('%', :contactInfo, '%'))
+		""", nativeQuery = true)
+	List<UserProfileEntity> searchUsers(@Param("contactInfo") String contactInfo);
+	
 }

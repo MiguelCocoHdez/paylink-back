@@ -38,4 +38,4 @@ spring:
         - id: MICROSERVICE-USER-PAYLINK
           uri: lb://MICROSERVICE-USER-PAYLINK
           predicates:
-            - Path=/paylink/user/**
+            - Path=/paylink/user/**, /paylink/contact/**

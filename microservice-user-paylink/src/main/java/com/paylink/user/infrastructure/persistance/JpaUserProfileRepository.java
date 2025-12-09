@@ -1,6 +1,7 @@
 package com.paylink.user.infrastructure.persistance;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -54,6 +55,18 @@ public class JpaUserProfileRepository implements UserProfileRepository {
 		}
 		
 		return userIncomplete;
+	}
+
+	@Override
+	public boolean existsById(Long id) {
+		return upr.existsById(id);
+	}
+
+	@Override
+	public List<UserProfile> searchUsers(String contactInfo) {
+		return upr.searchUsers(contactInfo).stream()
+				.map(mapper::toDomain)
+				.toList();
 	}
 
 }
