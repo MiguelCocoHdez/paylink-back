@@ -14,4 +14,6 @@ public interface ContactRepository {
 	Optional<Contact> findContactById(Long id);
 	
 	void deleteById(Long id);
+	
+	void deleteContactByUser(Long userId, Long contactUserId);
 }

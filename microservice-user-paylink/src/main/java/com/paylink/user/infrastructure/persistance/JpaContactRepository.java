@@ -40,4 +40,9 @@ public class JpaContactRepository implements ContactRepository {
 		cr.deleteById(id);
 	}
 
+	@Override
+	public void deleteContactByUser(Long userId, Long contactUserId) {
+		cr.deleteContactByUser(userId, contactUserId);
+	}
+
 }

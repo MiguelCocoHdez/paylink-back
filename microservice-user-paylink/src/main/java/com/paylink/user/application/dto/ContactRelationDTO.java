@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class SaveContactDTO {
+public class ContactRelationDTO {
 
 	private Long userId;
 	private Long contactUserId;

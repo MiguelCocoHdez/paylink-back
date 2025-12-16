@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
-import com.paylink.user.application.dto.SaveContactDTO;
+import com.paylink.user.application.dto.ContactRelationDTO;
 import com.paylink.user.application.port.in.SaveContactUseCase;
 import com.paylink.user.application.port.out.ContactRepository;
 import com.paylink.user.application.port.out.UserProfileRepository;
@@ -20,7 +20,7 @@ public class SaveContactService implements SaveContactUseCase {
 	private final UserProfileRepository upr;
 	
 	@Override
-	public void saveContact(SaveContactDTO contact) {
+	public void saveContact(ContactRelationDTO contact) {
 		if(!upr.existsById(contact.getContactUserId())) {
 			throw new IllegalArgumentException("Crear excepcion personalizada");
 		}
