@@ -3,6 +3,7 @@ package com.paylink.user.application.dto;
 import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import lombok.Setter;
 
 @AllArgsConstructor
 
+@Builder
 public class CreateTransactionDTO {
 
 	private Long receiverId;

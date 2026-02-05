@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.paylink.auth.application.response.ExceptionsResponse;
 import com.paylink.auth.domain.exception.InvalidCredentialsException;
+import com.paylink.auth.domain.exception.InvalidEmailOrUsernameException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -23,5 +24,13 @@ public class GlobalExceptionHandler {
 				.build());
 	}
 	
-	//crear registro con codigo 409 conflict
+	@ExceptionHandler(InvalidEmailOrUsernameException.class) //409 conflict
+	public ResponseEntity<ExceptionsResponse> handleInvalidRegister(InvalidCredentialsException ex) {
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(
+				ExceptionsResponse.builder()
+				.timestamp(LocalDateTime.now())
+				.status(HttpStatus.CONFLICT)
+				.message(ex.getMessage())
+				.build());
+	}
 }

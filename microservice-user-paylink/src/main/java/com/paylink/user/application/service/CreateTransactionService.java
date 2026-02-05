@@ -24,7 +24,7 @@ public class CreateTransactionService implements CreateTransactionUseCase {
 	public void createTransaction(Long senderId, CreateTransactionDTO transactionData) {
 		UserProfile sender = upr.findById(senderId);
 		
-		validateBalance(sender, sender.getBalance());
+		validateBalance(sender, transactionData.getAmount());
 		
 		String currency = sender.getCurrency();
 		String targetCurrency = upr.findById(transactionData.getReceiverId()).getCurrency();

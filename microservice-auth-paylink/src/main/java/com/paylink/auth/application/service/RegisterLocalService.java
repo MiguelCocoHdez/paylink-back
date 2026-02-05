@@ -7,6 +7,7 @@ import com.paylink.auth.application.dto.UserRegisterLocalDTO;
 import com.paylink.auth.application.port.in.RegisterLocalUseCase;
 import com.paylink.auth.application.port.out.UserRegisteredPublisher;
 import com.paylink.auth.application.port.out.UserRepository;
+import com.paylink.auth.domain.exception.InvalidEmailOrUsernameException;
 import com.paylink.auth.domain.model.User;
 import com.paylink.kafka.events.UserRegisteredEvent;
 import com.paylink.security.jwt.JwtService;
@@ -27,11 +28,11 @@ public class RegisterLocalService implements RegisterLocalUseCase {
 		String encriptedPw = pe.encode(user.getPassword());
 		
 		if(ur.existsByEmail(user.getEmail())) {
-			throw new IllegalArgumentException("Email ya registrado");
+			throw new InvalidEmailOrUsernameException("Email ya registrado");
 		}
 		
 		if(ur.existsByUsername(user.getUsername())) {
-			throw new IllegalArgumentException("Username ya registrado");
+			throw new InvalidEmailOrUsernameException("Username ya registrado");
 		}
 		
 		User userRegistered = ur.save(User.createUserLocal(user.getUsername(), user.getEmail(), encriptedPw));

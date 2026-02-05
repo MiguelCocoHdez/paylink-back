@@ -2,6 +2,7 @@ package com.paylink.kafka.events;
 
 import java.math.BigDecimal;
 
+
 public record ExchangeSuccessEvent(
 		Long id,
 		Long senderId,
