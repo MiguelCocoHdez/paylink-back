@@ -34,7 +34,7 @@ jobs:
         run: mvn test
 
       - name: Generate JaCoCo coverage reports
-        run: mvn jacoco:report
+        run: mvn verify
 
       - name: Upload test reports
         if: always()
