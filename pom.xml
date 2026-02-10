@@ -27,6 +27,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>21</maven.compiler.release>
+    <sonar.organization>miguelcocohdez</sonar.organization>
   </properties>
   <dependencies/>
   <build>
@@ -59,7 +60,6 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-                    <!-- Reporte agregado de todos los módulos -->
                     <execution>
                         <id>report-aggregate</id>
                         <phase>verify</phase>
